@@ -3,8 +3,9 @@ type PokemonImageProps = {
     id: number;
     size?: number;
     backImage?: boolean;
+    isVisible?: boolean;
 };
-export const PokemonImage = component$<PokemonImageProps>(({ id, size = 200, backImage = false }) => {
+export const PokemonImage = component$<PokemonImageProps>(({ id, size = 200, backImage = false, isVisible = true }) => {
     const isImageLoaded = useSignal(false);
     useTask$(({ track }) => {
         track(() => id); // se dispara cuando se cambia el id
@@ -28,9 +29,13 @@ export const PokemonImage = component$<PokemonImageProps>(({ id, size = 200, bac
                 onLoad$={() => {
                     isImageLoaded.value = true;
                 }}
-                class={{
-                    hidden: !isImageLoaded.value,
-                }}
+                class={[
+                    {
+                        hidden: !isImageLoaded.value,
+                        'brightness-0': !isVisible,
+                    },
+                    'transition-all',
+                ]}
             />
         </div>
     );
