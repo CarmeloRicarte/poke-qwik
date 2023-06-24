@@ -1,10 +1,7 @@
 import { component$, Slot, useStyles$ } from '@builder.io/qwik';
 import type { RequestHandler } from '@builder.io/qwik-city';
-import { routeLoader$ } from '@builder.io/qwik-city';
 
-import Footer from '~/components/starter/footer/footer';
-import Header from '~/components/starter/header/header';
-
+import { Footer, Navbar } from '../components/shared';
 import styles from './styles.css?inline';
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
@@ -18,17 +15,11 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
     });
 };
 
-export const useServerTimeLoader = routeLoader$(() => {
-    return {
-        date: new Date().toISOString(),
-    };
-});
-
 export default component$(() => {
     useStyles$(styles);
     return (
         <>
-            <Header />
+            <Navbar />
             <main class="flex flex-col items-center justify-center">
                 <Slot />
             </main>
