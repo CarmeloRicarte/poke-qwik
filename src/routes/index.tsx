@@ -1,9 +1,10 @@
 import { $, component$, useSignal } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
+import { PokemonImage } from '../components/pokemons/pokemon-image';
 
 export default component$(() => {
     const pokemonId = useSignal(1); // use it for booleans, strings, numbers
-
+    const showBackImage = useSignal(false);
     const changePokemonId = $((value: number) => {
         if (pokemonId.value + value <= 0) return;
         pokemonId.value += value;
@@ -14,12 +15,7 @@ export default component$(() => {
             <span class="text-2xl">Buscador simple</span>
             <span class="text-9xl">{pokemonId}</span>
 
-            <img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId.value}.png`}
-                alt="Pokemon Sprite"
-                width={200}
-                height={200}
-            />
+            <PokemonImage id={pokemonId.value} backImage={showBackImage.value} />
 
             <div class="mt-2">
                 <button
@@ -29,8 +25,19 @@ export default component$(() => {
                     type="button">
                     Anterior
                 </button>
-                <button onClick$={() => changePokemonId(1)} class="btn btn-primary" id="btnSiguiente" type="button">
+                <button
+                    onClick$={() => changePokemonId(1)}
+                    class="btn btn-primary mr-2"
+                    id="btnSiguiente"
+                    type="button">
                     Siguiente
+                </button>
+                <button
+                    onClick$={() => (showBackImage.value = !showBackImage.value)}
+                    class="btn btn-primary"
+                    id="btnVoltear"
+                    type="button">
+                    Voltear
                 </button>
             </div>
         </>
