@@ -8,9 +8,9 @@ export default component$(() => {
         <header class={styles.header}>
             <div class={['container', styles.wrapper]}>
                 <div class={styles.logo}>
-                    <a href="/" title="qwik">
+                    <Link href="/" title="qwik">
                         <QwikLogo height={50} />
-                    </a>
+                    </Link>
                 </div>
                 <ul>
                     <li>
