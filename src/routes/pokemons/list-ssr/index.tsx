@@ -1,20 +1,22 @@
 import { component$, useComputed$ } from '@builder.io/qwik';
-import { Link, routeLoader$, useLocation, type DocumentHead } from '@builder.io/qwik-city';
-import type { PokemonListResponseT } from './pokemonListResponseT';
+import { routeLoader$, useLocation, useNavigate, type DocumentHead } from '@builder.io/qwik-city';
+import { PokemonImage } from '../../../components/pokemons/pokemon-image';
+import { getSmallPokemons } from '../helpers';
+import type { SmallPokemonT } from '../types';
 
-export const usePokemonList = routeLoader$(async ({ query, redirect, pathname }) => {
+export const usePokemonList = routeLoader$<SmallPokemonT[]>(async ({ query, redirect, pathname }) => {
     const offset = Number(query.get('offset') || '0');
     if (offset < 0 || isNaN(offset)) {
         throw redirect(301, pathname);
     }
-    const resp = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=${offset}`);
-    const data = (await resp.json()) as PokemonListResponseT;
-    return data.results;
+
+    return await getSmallPokemons(offset);
 });
 
 export default component$(() => {
     const pokemons = usePokemonList();
     const location = useLocation();
+    const navigate = useNavigate();
 
     const currentOffset = useComputed$(() => {
         const offsetString = new URLSearchParams(location.url.search);
@@ -29,17 +31,25 @@ export default component$(() => {
             </div>
 
             <div class="mt-10">
-                <Link href={`/pokemons/list-ssr/?offset=${currentOffset.value - 10}`} class="btn btn-primary mr-2">
+                <button
+                    type="button"
+                    disabled={currentOffset.value === 0}
+                    onClick$={() => navigate(`/pokemons/list-ssr/?offset=${currentOffset.value - 10}`)}
+                    class="btn btn-primary mr-2">
                     Anteriores
-                </Link>
-                <Link href={`/pokemons/list-ssr/?offset=${currentOffset.value + 10}`} class="btn btn-primary mr-2">
+                </button>
+                <button
+                    type="button"
+                    onClick$={() => navigate(`/pokemons/list-ssr/?offset=${currentOffset.value + 10}`)}
+                    class="btn btn-primary mr-2">
                     Siguientes
-                </Link>
+                </button>
             </div>
 
             <div class="grid grid-cols-6 mt-5">
-                {pokemons.value.map(({ name }) => (
+                {pokemons.value?.map(({ name, id }) => (
                     <div key={name} class="m-5 flex flex-col justify-center items-center">
+                        <PokemonImage id={id} />
                         <span class="capitalize">{name}</span>
                     </div>
                 ))}

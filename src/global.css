@@ -74,4 +74,5 @@ body {
 
 button:disabled {
     @apply bg-gray-800;
+    cursor: not-allowed;
 }
