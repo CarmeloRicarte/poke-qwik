@@ -1,6 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 import { Link, routeLoader$, type DocumentHead } from '@builder.io/qwik-city';
-import type { PokemonListResponseT } from './index';
+import type { PokemonListResponseT } from './pokemonListResponseT';
 
 export const usePokemonList = routeLoader$(async () => {
     const resp = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10&offset=0');
