@@ -1,5 +1,5 @@
 import { component$, useContext } from '@builder.io/qwik';
-import { routeLoader$ } from '@builder.io/qwik-city';
+import { Link, routeLoader$ } from '@builder.io/qwik-city';
 import { PokemonImage } from '../../../components/pokemons/pokemon-image';
 import { PokemonGameContext } from '../../../context';
 
@@ -23,6 +23,12 @@ export default component$(() => {
                 isVisible={pokemonGameContext.isPokemonVisible}
                 backImage={pokemonGameContext.isBackImageShowed}
             />
+
+            <div class="mt-10">
+                <Link href="/" class="btn btn-primary mr-2">
+                    Atrás
+                </Link>
+            </div>
         </>
     );
 });
