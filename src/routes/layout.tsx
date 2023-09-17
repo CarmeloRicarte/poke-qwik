@@ -2,8 +2,8 @@ import { component$, Slot, useContextProvider, useStore, useStyles$ } from '@bui
 import type { RequestHandler } from '@builder.io/qwik-city';
 
 import { Footer, Navbar } from '../components/shared';
-import type { PokemonGameStateT } from '../context';
-import { PokemonGameContext } from '../context';
+import type { PokemonGameStateT, PokemonListStateT } from '../context';
+import { PokemonGameContext, PokemonListContext } from '../context';
 import styles from './styles.css?inline';
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
@@ -20,13 +20,21 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
 export default component$(() => {
     useStyles$(styles);
 
-    const pokemonGame = useStore<PokemonGameStateT>({
+    const pokemonGameStore = useStore<PokemonGameStateT>({
         pokemonId: 1,
         isBackImageShowed: false,
         isPokemonVisible: true,
     });
 
-    useContextProvider(PokemonGameContext, pokemonGame);
+    const pokemonListStore = useStore<PokemonListStateT>({
+        currentPage: 0,
+        pokemons: [],
+        isLoading: false,
+        isFinalPage: false,
+    });
+
+    useContextProvider(PokemonGameContext, pokemonGameStore);
+    useContextProvider(PokemonListContext, pokemonListStore);
 
     return (
         <>

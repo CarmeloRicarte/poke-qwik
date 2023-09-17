@@ -1,16 +1,11 @@
-import { $, component$, useOnDocument, useStore, useTask$ } from '@builder.io/qwik';
+import { $, component$, useContext, useOnDocument, useTask$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { PokemonImage } from '../../../components/pokemons/pokemon-image';
+import { PokemonListContext } from '../../../context';
 import { getSmallPokemons } from '../helpers';
-import type { PokemonPageStateT } from './pokemonListClientT';
 
 export default component$(() => {
-    const pokemonState = useStore<PokemonPageStateT>({
-        currentPage: 0,
-        pokemons: [],
-        isLoading: false,
-        isFinalPage: false,
-    });
+    const pokemonState = useContext(PokemonListContext);
 
     const GRACE_MARGIN_CURRENT_SCROLL = 200;
     const POKEMONS_PER_PAGE = 10;
@@ -44,8 +39,14 @@ export default component$(() => {
         <>
             <div class="flex flex-col">
                 <span class="my-5 text-5xl">Estado</span>
-                <span>P;agina actual: {pokemonState.currentPage} </span>
+                <span>Página actual: {pokemonState.currentPage} </span>
                 <span>Está cargando: {pokemonState.isLoading}</span>
+            </div>
+
+            <div class="mt-10">
+                <button type="button" onClick$={() => pokemonState.currentPage++} class="btn btn-primary mr-2">
+                    Siguientes
+                </button>
             </div>
 
             <div class="grid sm:grid-cols-2 md:grid-cols-5 xl:grid-cols-7 mt-5">
