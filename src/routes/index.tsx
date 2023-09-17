@@ -1,26 +1,29 @@
-import { $, component$, useSignal } from '@builder.io/qwik';
+import { $, component$, useContext } from '@builder.io/qwik';
 import { useNavigate, type DocumentHead } from '@builder.io/qwik-city';
 import { PokemonImage } from '../components/pokemons/pokemon-image';
+import { PokemonGameContext } from '../context';
 
 export default component$(() => {
-    const pokemonId = useSignal(1); // use it for booleans, strings, numbers
-    const showBackImage = useSignal(false);
-    const isPokemonVisible = useSignal(true);
+    const pokemonGameContext = useContext(PokemonGameContext);
     const nav = useNavigate();
     const changePokemonId = $((value: number) => {
-        if (pokemonId.value + value <= 0) return;
-        pokemonId.value += value;
+        if (pokemonGameContext.pokemonId + value <= 0) return;
+        pokemonGameContext.pokemonId += value;
     });
 
-    const goToPokemon = $(async () => await nav(`/pokemon/${pokemonId.value}`));
+    const goToPokemon = $(async () => await nav(`/pokemon/${pokemonGameContext.pokemonId}`));
 
     return (
         <>
             <span class="text-2xl">Buscador simple</span>
-            <span class="text-9xl">{pokemonId}</span>
+            <span class="text-9xl">{pokemonGameContext.pokemonId}</span>
 
             <div class="cursor-pointer" onClick$={async () => goToPokemon()}>
-                <PokemonImage id={pokemonId.value} backImage={showBackImage.value} isVisible={isPokemonVisible.value} />
+                <PokemonImage
+                    id={pokemonGameContext.pokemonId}
+                    backImage={pokemonGameContext.isBackImageShowed}
+                    isVisible={pokemonGameContext.isPokemonVisible}
+                />
             </div>
 
             <div class="mt-2">
@@ -39,18 +42,18 @@ export default component$(() => {
                     Siguiente
                 </button>
                 <button
-                    onClick$={() => (showBackImage.value = !showBackImage.value)}
+                    onClick$={() => (pokemonGameContext.isBackImageShowed = !pokemonGameContext.isBackImageShowed)}
                     class="btn btn-primary mr-2"
                     id="btnVoltear"
                     type="button">
                     Voltear
                 </button>
                 <button
-                    onClick$={() => (isPokemonVisible.value = !isPokemonVisible.value)}
+                    onClick$={() => (pokemonGameContext.isPokemonVisible = !pokemonGameContext.isPokemonVisible)}
                     class="btn btn-primary"
                     id="btnRevelar"
                     type="button">
-                    {isPokemonVisible.value ? 'Ocultar' : 'Revelar'}
+                    {pokemonGameContext.isPokemonVisible ? 'Ocultar' : 'Revelar'}
                 </button>
             </div>
         </>
