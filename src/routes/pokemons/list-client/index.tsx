@@ -40,7 +40,7 @@ export default component$(() => {
             <div class="flex flex-col">
                 <span class="my-5 text-5xl">Estado</span>
                 <span>Página actual: {pokemonState.currentPage} </span>
-                <span>Está cargando: {pokemonState.isLoading}</span>
+                <span>Está cargando: {pokemonState.isLoading ? 'Sí' : 'No'}</span>
             </div>
 
             <div class="mt-10">
