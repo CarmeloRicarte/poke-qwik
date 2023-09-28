@@ -1,8 +1,6 @@
 import { component$, Slot, useStyles$ } from '@builder.io/qwik';
 import type { RequestHandler } from '@builder.io/qwik-city';
 
-import { Footer, Navbar } from '../components/shared';
-import { PokemonProvider } from '../context';
 import styles from './styles.css?inline';
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
@@ -19,13 +17,5 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
 export default component$(() => {
     useStyles$(styles);
 
-    return (
-        <PokemonProvider>
-            <Navbar />
-            <main class="flex flex-col items-center justify-center">
-                <Slot />
-            </main>
-            <Footer />
-        </PokemonProvider>
-    );
+    return <Slot />;
 });

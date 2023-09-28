@@ -1,5 +1,5 @@
 import { createContextId } from '@builder.io/qwik';
-import type { SmallPokemonT } from '../../routes/pokemons/types';
+import type { SmallPokemonT } from '../../routes/(pokemons)/pokemons/types';
 
 export type PokemonListStateT = {
     currentPage: number;

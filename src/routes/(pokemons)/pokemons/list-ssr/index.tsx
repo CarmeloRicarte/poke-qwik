@@ -1,7 +1,7 @@
 import { $, component$, useComputed$, useSignal, useStore, useVisibleTask$ } from '@builder.io/qwik';
 import { routeLoader$, useLocation, useNavigate, type DocumentHead } from '@builder.io/qwik-city';
-import { PokemonImage } from '../../../components/pokemons/pokemon-image';
-import { Modal } from '../../../components/shared';
+import { PokemonImage } from '../../../../components/pokemons/pokemon-image';
+import { Modal } from '../../../../components/shared';
 import { getSmallPokemons } from '../helpers';
 import { getDetailByPokemonId } from '../helpers/getDetailByPokemonId';
 import type { SmallPokemonT } from '../types';

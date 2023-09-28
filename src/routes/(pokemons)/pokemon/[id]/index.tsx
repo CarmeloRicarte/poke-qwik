@@ -1,7 +1,7 @@
 import { component$ } from '@builder.io/qwik';
 import { Link, routeLoader$ } from '@builder.io/qwik-city';
-import { PokemonImage } from '../../../components/pokemons/pokemon-image';
-import { usePokemonGame } from '../../../hooks/usePokemonGame';
+import { PokemonImage } from '../../../../components/pokemons/pokemon-image';
+import { usePokemonGame } from '../../../../hooks/usePokemonGame';
 
 export const usePokemonId = routeLoader$<number>(({ params, redirect }) => {
     const id = Number(params.id);
