@@ -3,7 +3,7 @@ import { Link } from '@builder.io/qwik-city';
 import { QwikLogo } from '../../icons/qwik';
 import styles from './navbar.module.css';
 
-export default component$(() => {
+export const Navbar = component$(() => {
     return (
         <header class={styles.header}>
             <div class={['container', styles.wrapper]}>

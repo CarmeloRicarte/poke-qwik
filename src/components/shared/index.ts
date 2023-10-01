@@ -1,4 +1,4 @@
-export { default as Footer } from './Footer/footer';
+export * from './Footer/Footer';
 export * from './Modal/Modal';
-export { default as Navbar } from './Navbar/navbar';
-export * from './router-head/router-head';
+export * from './Navbar/Navbar';
+export * from './RouterHead/RouterHead';
