@@ -11,7 +11,7 @@ export default component$(() => {
                 <div class="login-white-bg">
                     <div class="max-w-md mx-auto">
                         <div>
-                            <h1 class="login-title">Login Form</h1>
+                            <h1 class="login-title">Acceso</h1>
                         </div>
                         <div class="login-content">
                             <Slot />
