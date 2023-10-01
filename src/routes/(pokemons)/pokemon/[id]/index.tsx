@@ -1,5 +1,5 @@
 import { component$ } from '@builder.io/qwik';
-import { Link, routeLoader$ } from '@builder.io/qwik-city';
+import { routeLoader$ } from '@builder.io/qwik-city';
 import { PokemonImage } from '../../../../components/pokemons/pokemon-image';
 import { usePokemonGame } from '../../../../hooks/usePokemonGame';
 
@@ -27,9 +27,6 @@ export default component$(() => {
                 <button onClick$={toggleFromVisible} class="btn btn-primary" id="btnRevelar" type="button">
                     {isPokemonVisible.value ? 'Ocultar' : 'Revelar'}
                 </button>
-                <Link href="/" class="btn btn-primary ml-2">
-                    Atrás
-                </Link>
             </div>
         </>
     );
