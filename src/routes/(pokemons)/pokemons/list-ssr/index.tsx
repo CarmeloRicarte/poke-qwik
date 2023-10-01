@@ -74,7 +74,7 @@ export default component$(() => {
                 </button>
             </div>
 
-            <div class="grid grid-cols-6 mt-5">
+            <div class="grid min-[320px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-5 xl:grid-cols-7 mt-5">
                 {pokemons.value?.map(({ name, id }) => (
                     <div
                         key={name}
