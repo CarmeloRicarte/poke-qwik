@@ -1,5 +1,5 @@
 import { component$ } from '@builder.io/qwik';
-import styles from './footer.module.css';
+import styles from './Footer.module.css';
 
 export const Footer = component$(() => {
     return (
